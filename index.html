@@ -11,11 +11,12 @@
             padding: 0;
         }      
 
-        nav{
+        nav, #contatos{
             display: flex;
             flex-direction: row;
             align-items: center;
             padding: 22px;
+            list-style: none;
         }
 
         #logo{
@@ -26,7 +27,9 @@
 
         #links {
             display: flex;
-            margin-left: 50%;
+            margin-left: 45%;
+            padding-right: 50px;
+            right: 5%;
             gap: 5em;
             font-size: 30px;
             color: black;
@@ -43,6 +46,82 @@
             font-weight: 800;
             color: black;
         }
+        
+        .imagens{
+            height: 450px;
+            width: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        main{ 
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 50px;
+            padding: 20px 0 120px 0;
+        }
+
+        h1{
+            text-align: center;
+            font-size: 40px;
+        }
+
+        .arrow{
+            height: 100px;
+            width: auto;
+        }
+
+        #vendas{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-left: 15%;
+            width: 70%;
+            align-items: center;
+        }
+
+        .carros.active{
+            display: flex;
+        }
+
+        .carros{
+            display: none;
+            gap: 100px;
+        }
+
+        .carros > div{
+            margin-top: 50px;
+        }
+
+        .nomecarro{
+            position: relative;
+            font-size: 30px;
+        }
+
+        footer{
+            background-color: black;
+        }
+
+        #contatos{
+            justify-content: space-around;
+            color: white;
+            font-weight: 600;
+            font-size: 25px;
+            margin: 0;
+        }
+
+        #contatos > li > div {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            align-items: center;
+        }
+
+        #contatos > li > div > img{
+            height: 40px;
+            width: auto;
+        }
     </style>
 </head>
 <body>
@@ -54,12 +133,82 @@
         </div>
     </nav>
     <main>
-        <section>
-
+        <h1>Nossas melhores ofertas!</h1>
+        <section id="vendas">
+            <img src="arrow1.png" alt="" class="arrow" id="anterior">
+            <div class="carros active">
+                <img id="img1" src="flinstones.png" alt="carro dos flinstones" class="imagens"> 
+                <div>
+                    <p class="nomecarro">Flinstones</p>
+                    <h1>R$ 30.000</h1>
+                </div>
+            </div>
+            <div class="carros">
+                <img id="img2" src="uva.png" alt="carro ervilha" class="imagens">
+                <div>
+                    <p class="nomecarro">Ervilha</p>
+                    <h1>R$ 1,99</h1>
+                </div>
+            </div>
+            <div class="carros">
+                <img id="img3" src="batman.jpeg" alt="carro do batman" class="imagens">
+                <div>
+                    <p class="nomecarro">Batmóvel</p>
+                    <h1>R$ 200.000</h1>
+                </div>
+            </div>
+            <img src="arrow.png" alt="" class="arrow" id="proximo">
         </section>
     </main>
-    <footer>
-        
+    <footer>  
+        <ul  id="contatos">
+            <li>
+                <div>
+                    <img src="instagram.png" alt="">
+                    <p>suave_na_nave</p>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="facebook.png" alt="">
+                    <p>Suave na nave</p>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="whatsapp.png" alt="">
+                    <p>41 98881-0610</p>
+                </div>
+            </li>
+        </ul>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const carros = document.querySelectorAll('.carros');
+            const proximo = document.getElementById('proximo');
+            const anterior = document.getElementById('anterior');
+            let contagem = 0;
+
+            function mostrarCarro(index){
+                carros.forEach(item => item.classList.remove('active'));
+                carros[index].classList.add('active');
+            }
+
+            function proximoCarro(){
+                contagem = (contagem + 1) % carros.length
+                mostrarCarro(contagem);
+            }
+
+            function anteriorCarro(){
+                contagem = (contagem + 1) % carros.length
+                mostrarCarro(contagem);
+            }
+
+            proximo.addEventListener('click', proximoCarro);
+            anterior.addEventListener('click', anteriorCarro);
+
+            mostrarCarro(contagem);
+        })
+    </script>
 </body>
 </html>
